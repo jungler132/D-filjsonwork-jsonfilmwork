@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { View,Text, ScrollView, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
+import { View,Text, ScrollView, StyleSheet, TouchableOpacity, TextInput, Image, Modal} from 'react-native';
 
 class ViewStyle extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            movieName:"star",
+            movieName:"kung fu",
             dataBase: [],
+            modalWindow:false,
+            temp:[]
+
         }
     }
     noImg = "https://tl.rulate.ru/i/book/19/10/18925.jpg"
@@ -52,14 +55,28 @@ class ViewStyle extends React.Component {
                 <Image source={{uri: item?.show?.image?.medium ?? this.noImg}} style={{width:150,height:200 , backgroundColor:"purple" , borderRadius:90}}/>
                 <Text style={{fontSize:25 , color:"white", alignItems:"center" , justifyContent:"center"}}>
                     {item.show.name}
-                    {/* {item.show.language}
-                    {item.show.genres}
-                    {item.score} */}
                 </Text>
-                
+                <TouchableOpacity onPress={() => {this.setState({modalWindow:true , temp : item})}} style={{flex:0.5,backgroundColor:"#000000aa" , borderRadius:10}}>
+                    <Text>
+                        Movie Stats
+                    </Text>
+                </TouchableOpacity>
                 </View>))}
-                
                 </ScrollView>
+                <Modal transparent={true} visible={this.state.modalWindow}>
+                    <View style={{flex:1 , backgroundColor:"#000000aa"}}>
+                        <View style={{flex:0.6,backgroundColor:"#ffffff",margin:50,padding:40,borderRadius:20}}>
+                            <TouchableOpacity onPress={() => {this.setState({modalWindow:false})}} style={{alignItems:"flex-end"}}>
+                                <Text>
+                                    X
+                                </Text>
+                            </TouchableOpacity>
+                            <Text>
+                                ne uspel do 14-00 :(
+                            </Text>
+                        </View>
+                    </View>
+                </Modal>
                 </View >
             </View>
         );
