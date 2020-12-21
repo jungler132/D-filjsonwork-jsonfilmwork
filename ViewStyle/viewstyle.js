@@ -72,7 +72,7 @@ class ViewStyle extends React.Component {
                                 </Text>
                             </TouchableOpacity>
                             <Text>
-                                ne uspel do 14-00 :(
+                                nikak ne vidit {this.temp.show.id}
                             </Text>
                         </View>
                     </View>
